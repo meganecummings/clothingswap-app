@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 // Internal Components
 import { withRouter, Switch, Route } from 'react-router-dom';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 import { API_URL } from './constants';
 import axios from 'axios';
 import './App.css';
@@ -37,6 +38,7 @@ class App extends Component {
         <Switch>
           <NavBar logout={this.handleLogout} currentUser={this.state.currentUser} />
           <Routes setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
+          <Footer />
         </Switch>
       </div>
     );
