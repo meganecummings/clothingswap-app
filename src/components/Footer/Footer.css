@@ -1,0 +1,77 @@
+.inline-block {
+    display: inline-block;
+}
+
+.font-weight-light {
+    font-weight: lighter;
+}
+
+.margin-horizontal-auto {
+    margin: auto;
+}
+
+.flexbox {
+    display: flexbox
+}
+
+.flex-wrap {
+    flex-wrap: wrap
+}
+
+.padding-left-broad {
+    padding-left: 1em;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.bg-color-black-on-hover {
+    background-color: var(--onyx);
+}
+
+.color-white-on-hover {
+    color: white;
+}
+
+.padding-bottom-150 {
+    padding-bottom: 150%
+}
+
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.border-solid {
+    border-style: solid;
+}
+
+.border-slimmer {
+    border-width: thin;
+}
+
+.border-color-black {
+    border-color: black
+}
+
+;
+.border-radius-full {
+    border-radius: 50%;
+}
+
+.bg-color-black-on-hover:hover {
+    background-color: black;
+}
+
+.color-white-on-hover:hover {
+    color: white;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Internal Components
-import { withRouter, Switch, Route } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router-dom';
 // import Home from './components/Home';
 import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
@@ -30,16 +30,12 @@ class App extends Component {
         .catch(error => console.log(error.response))
   };
 
-
-
   render() {
     return (
       <div className="App">
-        <Switch>
           <NavBar logout={this.handleLogout} currentUser={this.state.currentUser} />
           <Routes setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} />
-          <Footer />
-        </Switch>
+          {/* <Footer /> */}
       </div>
     );
   }

@@ -1,0 +1,46 @@
+.signup {
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    background-color: white;
+    border: 1px solid black;
+    opacity: .9;
+    border-radius: 4px;
+    position: fixed;
+}
+
+form {
+    padding: 1em;
+}
+
+.row h2 {
+    margin-left: 18rem;
+}
+
+.form-control {
+    padding: .8em;
+    border: 1px solid #1b4079;
+    border-radius: 4px;
+    margin: 1em;
+}
+
+.signup .submit {
+    border: 1px solid black;
+    border-radius: 4px;
+    background: #1b4079;
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+.exit-form {
+    border: 1px solid black;
+    border-radius: 0 0 4px 4px;
+    background: #1b4079;
+    color: white;
+    border: none;
+    padding: .5em;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

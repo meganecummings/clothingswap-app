@@ -1,0 +1,19 @@
+.login {
+    top: 20%;
+    left: 25%;
+    width: 50%;
+    background-color: white;
+    border: 1px solid black;
+    opacity: .9;
+    border-radius: 4px;
+    position: fixed;
+}
+
+.login .submit {
+    border: 1px solid black;
+    border-radius: 4px;
+    background: #1b4079;
+    color: white;
+    border: none;
+    padding: 10px
+}
