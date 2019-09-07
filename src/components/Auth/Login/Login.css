@@ -3,16 +3,16 @@
     left: 25%;
     width: 50%;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid var(--rust);
     opacity: .9;
     border-radius: 4px;
     position: fixed;
 }
 
 .login .submit {
-    border: 1px solid black;
+    border: 1px solid var(--rust);
     border-radius: 4px;
-    background: #1b4079;
+    background: var(--rust);
     color: white;
     border: none;
     padding: 10px

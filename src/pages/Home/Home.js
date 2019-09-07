@@ -19,16 +19,16 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="home-page relative">
-                <section className="home-image container absolute opacity full-width">
-                    <img className="cover full-width light-padding"src={this.image[0].url} alt={this.image[0].alt}/>
-                </section>
+            <div className="home-page">
+                <div className="home-image container full-width clothing-image-bkground">
+                    
+                </div>
                 {this.props.login && <Login setCurrentUser={this.props.setCurrentUser} history={this.props.history} /> }
                 {this.props.register && <Register history={this.props.history} /> }
                 <div className="main">
                     <section className="main-header centered high-z absolute half-screen full-width">
-                        <h2 className="white-color">Haute Swap</h2>
-                        <h3 className="white-color">swap don't shop</h3>
+                        <h1 className="white">Haute Swap</h1>
+                        <h2 className="white">swap don't shop</h2>
                     </section>
                 </div>
 

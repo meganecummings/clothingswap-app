@@ -3,6 +3,7 @@ nav {
     display: flex;
     justify-content: space-between;
     height: 12vh;
+    border-bottom: 5px var(--lightorange) solid;
 }
 
 nav h1 {
@@ -15,7 +16,7 @@ nav h1 {
 }
 
 .nav-li:hover {
-    color: orange;
+    color: var(--lightorange);
 }
 
 .nav-items {

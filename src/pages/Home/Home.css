@@ -18,6 +18,15 @@ body {
     background-repeat: no-repeat;
 }
 
+.clothing-image-bkground {
+    background-image: linear-gradient(rgba(97, 41, 3, 0.509), rgba(97, 41, 3, .3)), url("https://images.unsplash.com/photo-1484502249930-e1da807099a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    border-bottom: 5px var(--lightorange) solid;
+}
+
 .high-z {
     z-index: 10;
 }
@@ -40,27 +49,32 @@ body {
 }
 
 .main-header {
-    background-color: var(--lightorange);
+    /* background-color: var(--rust); */
 }
 
 .centered {
     text-align: center;
 }
 
-.white-color {
+.white {
     color: var(--white);
-    opacity: 1;
 }
 
-.home-body h2,
+.rust {
+    color: var(--rust);
+}
+
+
+/* .home-body h2,
 h1 {
     display: flex;
-}
+} */
 
-.home-body h1 {
+
+/* .home-body h1 {
     display: flex;
     justify-content: center;
-}
+} */
 
 .heading {
     margin-top: 1%;

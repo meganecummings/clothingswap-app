@@ -34,7 +34,7 @@ class Login extends Component {
 
     render() {
         return(
-            <div className="container ogin">
+            <div className="container login">
                 <h1>Login</h1>
                 <Link className="exit-form" to="/">x</Link>
                 <div className="row text-center">

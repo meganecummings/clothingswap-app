@@ -3,6 +3,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 
 // Internal Components
 import Home from '../pages/Home/Home';
+import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
 
 
 const Routes = ({ setCurrentUser, history, currentUser }) => {
@@ -18,8 +19,12 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
     return (
         <Switch>
             <Route exact path='/' component={ Home } />
-            <Route path='/login' render={(props) => <Home {...props} login={props.match.path} setCurrentUser={setCurrentUser} {...history} /> } />
-            <Route path='/register' render={(props) => <Home {...props} register={props.match.path} />} />
+            <Route path='/login' render={(props) => 
+                <Home {...props} login={props.match.path} setCurrentUser={setCurrentUser} {...history} /> } />
+            <Route path='/register' render={(props) => 
+                <Home {...props} register={props.match.path} />} />
+            <Route path="/profile" render={(props) => 
+                <ProfileContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
         </Switch>
     )
 };    
