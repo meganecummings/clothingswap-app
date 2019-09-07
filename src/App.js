@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 // Internal Components
 import { withRouter, Switch } from 'react-router-dom';
-// import Home from './components/Home';
 import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';

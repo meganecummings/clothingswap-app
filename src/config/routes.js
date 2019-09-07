@@ -4,6 +4,7 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 // Internal Components
 import Home from '../pages/Home/Home';
 import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
+import EventsContainer from '../containers/EventsContainer/EventsContainer';
 
 
 const Routes = ({ setCurrentUser, history, currentUser }) => {
@@ -25,6 +26,9 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
                 <Home {...props} register={props.match.path} />} />
             <Route path="/profile" render={(props) => 
                 <ProfileContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
+            <Route path="/events" render={(props) => 
+                <EventsContainer {...props} currentUser={currentUser}  addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
+            }/>
         </Switch>
     )
 };    
