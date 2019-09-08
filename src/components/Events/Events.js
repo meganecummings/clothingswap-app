@@ -8,6 +8,7 @@ import './Events.css';
 
 const Events = ({ events, currentUser, handleDelete, displayEventsPosts }) => {
     console.log(events)
+    
     const eventsArr = events.data.map(event => {
         return(
             <Link key={event._id} to={`/events/${event._id}`} >
