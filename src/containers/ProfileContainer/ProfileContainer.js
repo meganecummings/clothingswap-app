@@ -6,6 +6,9 @@ import { API_URL } from '../../constants';
 import Profile from '../../components/Profile/Profile';
 import { Link } from 'react-router-dom';
 import './ProfileContainer.css';
+import EventsContainer from '../../containers/EventsContainer/EventsContainer';
+import Event from '../../components/Events/Event';
+import Post from '../../components/Post/Post';
 
 class ProfileContainer extends Component {
     state ={
@@ -84,26 +87,41 @@ class ProfileContainer extends Component {
 
     displayEvents = events => {
         return events.map(foundEvent => (
-            <div className="event" key={foundEvent._id}>
-                <Link to={`/events/${foundEvent._id}`}>Check out this Event</Link>
-                <h4>{foundEvent.title}</h4>
-                <p>{foundEvent.description}</p>
-                <p>Event Date: {foundEvent.date}</p>
+            <div className="your-events-container" key={foundEvent._id}>
+                <Event event={foundEvent} displayPosts={this.displayPosts} />
             </div>
         ));
     };
 
+    displayPosts = posts => {
+        return posts.map(post => {
+            return(
+                <div className="your-posts-container" key={post._id}> 
+                    <Link to={`/posts/${post._id}`} ></Link>
+                    <Post title={post.title} authorUsername={post.authorUsername} description={post.description} content={post.content} />
+                </div>
+            )
+        });
+    }
+
     render() {
-        const { currentUser } = this.props;
         return (
-            <div className="post-container">
-                {this.state.errors && this.displayErrors(this.state.errors)};
-                {this.state.profile && <Profile user={this.state.profile.data} events={this.state.events} items={this.state.items} errors={this.state.errors}/>}
-                <div className="event-container">
+            <div className="profile-page-container">
+                {this.state.errors && this.displayErrors(this.state.errors)}
+                <div className="your-profile-container">
+                    {this.state.profile && 
+                        <Profile 
+                            user={this.state.profile.data} 
+                            errors={this.state.errors} 
+                            currentUser={this.props.currentUser}       
+                    />}
+                </div>
+ 
+                <div className="your-events-container">
                     <h2> Events You're Hosting </h2>
                     {this.state.events.length ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
-                <div className="items-container">
+                <div className="your-items-container">
                     <h2> Your Items </h2>
                     {this.state.items.length ? this.displayItems(this.state.items) : <p>You Don't Have Any Items Yet. Add some Soon! </p>}
                 </div>
