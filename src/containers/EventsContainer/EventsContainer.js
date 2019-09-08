@@ -4,13 +4,14 @@ import slugify from 'react-slugify';
 
 // Internal Components
 import { API_URL } from '../../constants';
-import Events from '../../components/Events/Events';
+// import Events from '../../components/Events/Events';
+import Event from '../../components/Events/Event';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
 
 class EventsContainer extends Component {
     state = {
-        events: [],
+        events: null,
         userEvents: null,
         profile: null, 
         title: '',
@@ -27,7 +28,6 @@ class EventsContainer extends Component {
     };
 
     componentDidMount() {
-        this.getUserInfo();
         this.getEvents();
     };
 
@@ -55,7 +55,7 @@ class EventsContainer extends Component {
     }; 
 
     getUserEvents = () => {
-        const userId = localStorage.getItem('uid');
+        const userId = this.props.currentUser
         axios.get(`${API_URL}/users/${userId}/events`, { withCredentials: true })
             .then(response => this.setState({ userEvents: response.data }))
             .catch(error => console.log(error))
@@ -102,29 +102,32 @@ class EventsContainer extends Component {
             .catch(error => console.log(error.response));
     };
 
-    getUserInfo = () => {
-        const userId = localStorage.getItem('uid');
-        axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
-            .then(response => this.setState({ profile: response.data }))
-            .catch(error => console.log(error));
+    displayEvents = events => {
+        return events.data.map(foundEvent => (
+            <div className="your-events-container" key={foundEvent._id}>
+                <Event event={foundEvent} displayPosts={this.displayPosts} />
+            </div>
+        ));
     };
 
     render() {
         return (
             <div className="events-container">
-                {this.props.deleteEvent && 
-                <div> 
-                    <Link to="/events"> <button>Cancel</button> </Link>
-                    <button onClick={this.deleteEvent}>Delete</button>
-                </div>}
+                {this.deleteEvent && 
+                    <div> 
+                        <Link to="/events"> <button>Cancel</button> </Link>
+                        <button onClick={this.deleteEvent}>Delete</button>
+                    </div>}
+
                 <div className="events-container">
-                    {this.state.events.length ? 
-                    <Events events={this.state.events} handleDelete={this.handleDelete} handleEdit={this.handleEdit} /> : <p> No Events Yet! Stay Tuned. </p>
-                    }
+                    <h2> Events </h2>
+                    {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
+
                 {this.props.addEvent && 
                     <div className="add-event">
-                        <Link onClick={() => this.props.goBack()}>Add Event</Link>
+                        <h1>Your New Event</h1>
+                        <Link className="exit-form" onClick={() => this.props.goBack()}>x</Link>
                         <form >
                             <label>Title of the Event</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
