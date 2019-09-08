@@ -7,7 +7,7 @@ import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 
 
-const Routes = ({ setCurrentUser, history, currentUser }) => {
+const Routes = ({ setCurrentUser, profile, displayEvents, history, currentUser }) => {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
         <Route {...rest} render={( props ) => (
@@ -25,11 +25,13 @@ const Routes = ({ setCurrentUser, history, currentUser }) => {
             <Route path='/register' render={(props) => 
                 <Home {...props} register={props.match.path} />} />
             <Route path="/profile" render={(props) => 
-                <ProfileContainer {...props} currentUser={currentUser} addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
+                <ProfileContainer {...props} currentUser={currentUser} addPost={true} addEvent={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} profile={profile} />} />
             <Route path="/events" render={(props) => 
-                <EventsContainer {...props} currentUser={currentUser}  addPost={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} />} />
+                <EventsContainer {...props} currentUser={currentUser}  addPost={true} addEvent={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} displayEvents={displayEvents} profile={profile} />  } />
             }/>
-            
+            <Route path="/events/:event_id" render={(props) => 
+                <EventsContainer {...props} currentUser={currentUser} addEvent={true}  profile={profile}/>} />
+
             <Route path='*' render={() => <section><h2>Not Found</h2></section>} />
         </Switch>
     )
