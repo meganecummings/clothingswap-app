@@ -1,0 +1,25 @@
+.add-event {
+    top: 20%;
+    left: 25%;
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 1;
+}
+
+.add-event form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-event label {
+    font-weight: bold;
+}
+
+.add-event button {
+    margin-top: 1em;
+    height: 2em;
+    width: 5em;
+}
