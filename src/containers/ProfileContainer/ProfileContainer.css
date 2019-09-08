@@ -1,3 +1,55 @@
+.profile-page-container {
+    margin-top: 16vh;
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    height: 90vh;
+}
+
+.your-profile-container {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    height: 100vh;
+    margin: 1em;
+}
+
+.your-events-container,
+.your-items-container {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border: 2px solid var(--rust);
+    margin: 1em;
+}
+
+.add-event {
+    top: 20%;
+    left: 25%;
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    border: 1px solid var(--rust);
+    position: fixed;
+    z-index: 1;
+}
+
+.add-event form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-event label {
+    font-weight: bold;
+}
+
+.add-event button {
+    margin-top: 1em;
+    height: 2em;
+    width: 5em;
+}
+
+#add-event-content {
+    height: 15vh;
+}
+
 .event-container .items-container {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
