@@ -7,7 +7,7 @@ import ProfileContainer from '../containers/ProfileContainer/ProfileContainer';
 import EventsContainer from '../containers/EventsContainer/EventsContainer';
 
 
-const Routes = ({ setCurrentUser, profile, displayEvents, history, currentUser }) => {
+const Routes = ({ setCurrentUser, displayEvents, getUserInfo, history, currentUser }) => {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
         <Route {...rest} render={( props ) => (
@@ -25,13 +25,13 @@ const Routes = ({ setCurrentUser, profile, displayEvents, history, currentUser }
             <Route path='/register' render={(props) => 
                 <Home {...props} register={props.match.path} />} />
             <Route path="/profile" render={(props) => 
-                <ProfileContainer {...props} currentUser={currentUser} addPost={true} addEvent={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} profile={profile} />} />
+                <ProfileContainer {...props} currentUser={currentUser} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} getUserInfo={getUserInfo} />} />
             <Route path="/events" render={(props) => 
-                <EventsContainer {...props} currentUser={currentUser}  addPost={true} addEvent={true} {...history} slug={props.match.params.slug} user_id={props.match.params.user_id} displayEvents={displayEvents} profile={profile} />  } />
-            }/>
+                <EventsContainer {...props} currentUser={currentUser} {...history}  getUserInfo={getUserInfo} displayEvents={displayEvents} />  } />
+            <Route path="/events/new" render={(props) => 
+                <EventsContainer {...props} currentUser={currentUser} {...history} addEvent={true} getUserInfo={getUserInfo} displayEvents={displayEvents} />  } />
             <Route path="/events/:event_id" render={(props) => 
-                <EventsContainer {...props} currentUser={currentUser} addEvent={true}  profile={profile}/>} />
-
+                <EventsContainer {...props} currentUser={currentUser} getUserInfo={getUserInfo}  />} />
             <Route path='*' render={() => <section><h2>Not Found</h2></section>} />
         </Switch>
     )
