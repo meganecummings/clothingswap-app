@@ -15,20 +15,28 @@ class EventsContainer extends Component {
         userEvents: null,
         profile: null, 
         title: '',
-        description: null,
-        location: null,
-        date: null,
-        startTime: null,
-        endTime: null,
-        cancelled: null,
-        cancelledAt: null,
-        slug: null,
-        image: null, 
-        invitees: null
+        description: '',
+        location: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        cancelled: '',
+        cancelledAt: '',
+        slug: '',
+        image: '', 
+        invitees: ''
     };
 
     componentDidMount() {
         this.getEvents();
+        this.getUserInfo();
+    };
+
+    getUserInfo = () => {
+        const userId = localStorage.getItem('uid');
+        axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
+            .then(response => this.setState({ profile: response.data }))
+            .catch(error => console.log(error));
     };
 
     handleChange = (event) => {
@@ -39,14 +47,14 @@ class EventsContainer extends Component {
 
     handleEdit = event => {
         event.preventDefault();
-    }
+    };
 
     handleDelete = (event, id) => {
         event.preventDefault();
         console.log(id);
         this.deleteEvent(event, id);
         this.getEvents();
-    }
+    };
 
     getEvents = () => {
         axios.get(`${API_URL}/events`, { withCredentials: true })
@@ -59,13 +67,13 @@ class EventsContainer extends Component {
         axios.get(`${API_URL}/users/${userId}/events`, { withCredentials: true })
             .then(response => this.setState({ userEvents: response.data }))
             .catch(error => console.log(error))
-    }
+    };
 
     submitEvent = event => {
         event.preventDefault();
         const currentEvents = this.state.events;
         axios.post(`${API_URL}/events/new`, {
-            hostUsername: this.state.profile.username,
+            hostUsername: this.state.profile.data.username,
             title: this.state.title,
             description: this.state.description,
             location: this.state.location,
@@ -113,29 +121,31 @@ class EventsContainer extends Component {
     render() {
         return (
             <div className="events-container">
-                {this.deleteEvent && 
+                {this.props.deleteEvent && 
                     <div> 
                         <Link to="/events"> <button>Cancel</button> </Link>
                         <button onClick={this.deleteEvent}>Delete</button>
                     </div>}
 
-                <div className="events-container">
+                <div className="events">
                     <h2> Events </h2>
+                    {this.props.currentUser &&
+                    <Link to={`/events/new`} className="event-btn">+</Link>
+                }
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
-                </div>
 
+                </div>
                 {this.props.addEvent && 
                     <div className="add-event">
+                        <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
                         <h1>Your New Event</h1>
-                        <Link className="exit-form" onClick={() => this.props.goBack()}>x</Link>
                         <form >
                             <label>Title of the Event</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                             <label>Description</label>
                             <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
                             <label>Location</label>
-                            <input type="text" name="
-                            location" value={this.state.
+                            <input type="text" name="location" value={this.state.
                             location} onChange={this.handleChange} />
                             <label>Date</label>
                             <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
