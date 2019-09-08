@@ -28,6 +28,12 @@ class ProfileContainer extends Component {
         this.getItems();
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.match.params.userId !== this.props.match.params.userId) {
+            this.getUserInfo();
+        };
+    };
+
     getUserInfo = () => {
         const userId = localStorage.getItem('uid');
         axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
@@ -62,7 +68,7 @@ class ProfileContainer extends Component {
                 <Link to={`/items/${foundItem._id}`}>Check out this item</Link>
                 <h4>{foundItem.title}</h4>
                 <p>{foundItem.description}</p>
-                <img src={foundItem.image} alt="Item" />
+                <img src={foundItem.image} alt={`${foundItem.title}`} />
             </div>
         ));
     };
@@ -88,13 +94,14 @@ class ProfileContainer extends Component {
     };
 
     render() {
+        const { currentUser } = this.props;
         return (
             <div className="post-container">
                 {this.state.errors && this.displayErrors(this.state.errors)};
-                {this.state.profile && <Profile user={this.state.profile.data} events={this.state.events} items={this.state.items} />}
+                {this.state.profile && <Profile user={this.state.profile.data} events={this.state.events} items={this.state.items} errors={this.state.errors}/>}
                 <div className="event-container">
                     <h2> Events You're Hosting </h2>
-                    {this.state.events && this.displayEvents(this.state.events)}
+                    {this.state.events.length ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
                 <div className="items-container">
                     <h2> Your Items </h2>

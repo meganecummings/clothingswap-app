@@ -1,30 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
-const slugify = require('slugify');
+import slugify from 'react-slugify';
 
 // Internal Components
 import { API_URL } from '../../constants';
 import Events from '../../components/Events/Events';
-import EventsPostsContainer from './EventsPostsContainers/EventsPostsContainers';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
 
 class EventsContainer extends Component {
     state = {
-        events: null,
+        events: [],
         userEvents: null,
         profile: null, 
-        eventTitle: '',
-        eventDescription: null,
-        eventLocation: null,
-        eventDate: null,
-        eventStartTime: null,
-        eventEndTime: null,
-        eventCancelled: null,
-        eventCancelled_at: null,
-        eventSlug: null,
-        eventImage: null, 
-        eventInvitees: null
+        title: '',
+        description: null,
+        location: null,
+        date: null,
+        startTime: null,
+        endTime: null,
+        cancelled: null,
+        cancelledAt: null,
+        slug: null,
+        image: null, 
+        invitees: null
     };
 
     componentDidMount() {
@@ -32,15 +31,15 @@ class EventsContainer extends Component {
         this.getEvents();
     };
 
-    // componentDidUpdate(prevProps, prevState) {
-
-    // }
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
     };
+
+    handleEdit = event => {
+        event.preventDefault();
+    }
 
     handleDelete = (event, id) => {
         event.preventDefault();
@@ -67,15 +66,15 @@ class EventsContainer extends Component {
         const currentEvents = this.state.events;
         axios.post(`${API_URL}/events/new`, {
             hostUsername: this.state.profile.username,
-            title: this.state.eventTitle,
-            description: this.state.eventDescription,
-            location: this.state.eventLocation,
-            date: this.state.eventDate,
-            startTime: this.state.eventStartTime,
-            endTime: this.state.eventEndTime,
-            slug: slugify(this.state.eventTitle),
-            image: this.state.eventImage, 
-            invitees: this.state.eventInvitees
+            title: this.state.title,
+            description: this.state.description,
+            location: this.state.location,
+            date: this.state.date,
+            startTime: this.state.startTime,
+            endTime: this.state.endTime,
+            slug: slugify(this.state.title),
+            image: this.state.image, 
+            invitees: this.state.invitees
         }, { withCredentials: true })
         .then(response => {
             currentEvents.push(response.data.data);
@@ -118,15 +117,37 @@ class EventsContainer extends Component {
                     <Link to="/events"> <button>Cancel</button> </Link>
                     <button onClick={this.deleteEvent}>Delete</button>
                 </div>}
-                
-                <div className="events-posts">
-                    <EventsPostsContainer events={this.state.events} />
+                <div className="events-container">
+                    {this.state.events.length ? 
+                    <Events events={this.state.events} handleDelete={this.handleDelete} handleEdit={this.handleEdit} /> : <p> No Events Yet! Stay Tuned. </p>
+                    }
                 </div>
+                {this.props.addEvent && 
+                    <div className="add-event">
+                        <Link onClick={() => this.props.goBack()}>Add Event</Link>
+                        <form >
+                            <label>Title of the Event</label>
+                            <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                            <label>Description</label>
+                            <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
+                            <label>Location</label>
+                            <input type="text" name="
+                            location" value={this.state.
+                            location} onChange={this.handleChange} />
+                            <label>Date</label>
+                            <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
+                            <label>Start Time</label>
+                            <input type="text" name="startTime" value={this.state.startTime} onChange={this.handleChange} />
+                            <label>Invitees</label>
+                            <input type="text" name="invitees" value={this.state.invitees} onChange={this.handleChange} />
+                            <label>URL for Image for Event</label>
+                            <input type="text" name="image" value={this.state.image} onChange={this.handleChange} />
+                            <button onClick={this.submitEvent}>Submit</button>
+                        </form>
+                    </div> }    
             </div>
         )
     }
-
-
 };
 
 export default EventsContainer;
