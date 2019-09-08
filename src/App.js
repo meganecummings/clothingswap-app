@@ -22,8 +22,8 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    {this.state.currentUser && this.getUserInfo() }  
-  }
+    this.getUserInfo(); 
+  };
 
   handleLogout = () => {
     localStorage.removeItem('uid');
@@ -57,7 +57,7 @@ class App extends Component {
           <Routes setCurrentUser={this.setCurrentUser} 
             currentUser={this.state.currentUser} 
             displayEvents={this.displayEvents} 
-            profile={this.state.profile}
+            getUserInfo={this.getUserInfo}
           />
           {/* <Footer /> */}
       </div>
