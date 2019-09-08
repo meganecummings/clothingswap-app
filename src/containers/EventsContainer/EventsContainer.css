@@ -1,12 +1,22 @@
 .add-event {
     top: 20%;
     left: 25%;
-    height: 50vh;
+    height: 80vh;
     width: 50vw;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid var(--lightorange);
     position: fixed;
     z-index: 1;
+    overflow: scroll;
+}
+
+.event-btn {
+    font-size: 3em;
+    margin-right: 1em;
+}
+
+.events-container {
+    margin-top: 16vh;
 }
 
 .add-event form {
@@ -16,10 +26,4 @@
 
 .add-event label {
     font-weight: bold;
-}
-
-.add-event button {
-    margin-top: 1em;
-    height: 2em;
-    width: 5em;
 }
