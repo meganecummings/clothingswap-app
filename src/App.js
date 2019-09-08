@@ -53,11 +53,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <NavBar logout={this.handleLogout} currentUser={this.state.currentUser} />{this.state.profile && 
-            <Routes setCurrentUser={this.setCurrentUser} currentUser={this.state.currentUser} displayEvents={this.displayEvents} 
+          <NavBar logout={this.handleLogout} currentUser={this.state.currentUser} />
+          <Routes setCurrentUser={this.setCurrentUser} 
+            currentUser={this.state.currentUser} 
+            displayEvents={this.displayEvents} 
             profile={this.state.profile}
-            />
-          }
+          />
           {/* <Footer /> */}
       </div>
     );
