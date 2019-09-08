@@ -2,12 +2,8 @@ nav {
     background-color: var(--rust);
     display: flex;
     justify-content: space-between;
-    height: 12vh;
+    height: 16vh;
     border-bottom: 5px var(--lightorange) solid;
-}
-
-nav h1 {
-    padding: .5em;
 }
 
 .nav-li {
@@ -27,7 +23,47 @@ nav h1 {
 
 .nav-items li {
     list-style-type: none !important;
-    padding: .5em;
     margin-right: 2em;
-    margin-top: 1.5em;
+    justify-content: right;
+}
+
+header {
+    padding-top: 30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a,
+nav span {
+    font-weight: 600;
+    letter-spacing: 0.75px;
+    letter-spacing: .05rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: .2rem 4rem;
+    display: inline-block;
+    border-bottom: none;
+    text-transform: uppercase;
+}
+
+.hamburger {
+    display: none;
+}
+
+h1 a,
+h1 a:hover,
+header h2 {
+    color: #fff;
 }
