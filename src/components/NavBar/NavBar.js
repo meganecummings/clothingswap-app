@@ -5,18 +5,18 @@ import './NavBar.css';
 const NavBar = ({ logout, currentUser }) => {
 
     const links = (
-        <div className="nav-items">
+        <>
             <li>
                 <NavLink className="nav-li" to="/login">Log In</NavLink>
             </li>
             <li>
                 <NavLink className="nav-li" to="/register">Register</NavLink>
             </li>
-        </div>
+        </>
     );
 
     const authLinks = (
-        <div className="nav-items">
+        <>
             <li>
                 <NavLink className="nav-li" to="/profile">Profile</NavLink>
             </li>
@@ -29,15 +29,15 @@ const NavBar = ({ logout, currentUser }) => {
             <li>
                 <span className="nav-li" onClick={logout} style={{ cursor: 'pointer' }}>Logout</span>
             </li>
-        </div>
+        </>
     );
 
     return (
         <nav>
-            <div className="logo">
-                <Link className="nav-li" to="/"><h1>haute swap</h1></Link>
+            <div className="nav-items">
+                <Link className="nav-li" to="/"><h1>UpSwap</h1></Link>
+                { currentUser ? authLinks : links }
             </div>
-            { currentUser ? authLinks : links }
         </nav>
     )
 
