@@ -4,7 +4,6 @@ import slugify from 'react-slugify';
 
 // Internal Components
 import { API_URL } from '../../constants';
-// import Events from '../../components/Events/Events';
 import Event from '../../components/Events/Event';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
@@ -13,7 +12,6 @@ class EventsContainer extends Component {
     state = {
         events: null,
         userEvents: null,
-        profile: null, 
         title: '',
         description: '',
         location: '',
@@ -28,15 +26,10 @@ class EventsContainer extends Component {
     };
 
     componentDidMount() {
+        if (this.props.eventID) this.getEvent();
+        else {
         this.getEvents();
-        this.getUserInfo();
-    };
-
-    getUserInfo = () => {
-        const userId = localStorage.getItem('uid');
-        axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
-            .then(response => this.setState({ profile: response.data }))
-            .catch(error => console.log(error));
+        }
     };
 
     handleChange = (event) => {
@@ -56,9 +49,17 @@ class EventsContainer extends Component {
         this.getEvents();
     };
 
+    getEvent = () => {
+        axios.get(`${API_URL}/events/${this.props.eventID}`, { withCredentials: true })
+            .then(response => { 
+                console.log(response.data)
+                this.setState({ events: [response.data.data] })})
+            .catch(error => console.log(error));
+    }; 
+
     getEvents = () => {
         axios.get(`${API_URL}/events`, { withCredentials: true })
-            .then(response => this.setState({ events: response.data }))
+            .then(response => this.setState({ events: response.data.data }))
             .catch(error => console.log(error));
     }; 
 
@@ -73,7 +74,7 @@ class EventsContainer extends Component {
         event.preventDefault();
         const currentEvents = this.state.events;
         axios.post(`${API_URL}/events/new`, {
-            hostUsername: this.state.profile.data.username,
+            hostUsername: this.props.profile.data.username,
             title: this.state.title,
             description: this.state.description,
             location: this.state.location,
@@ -82,9 +83,11 @@ class EventsContainer extends Component {
             endTime: this.state.endTime,
             slug: slugify(this.state.title),
             image: this.state.image, 
-            invitees: this.state.invitees
+            invitees: this.state.invitees,
+            attendees: this.props.profile.data._id
         }, { withCredentials: true })
         .then(response => {
+            console.log(response.data)
             currentEvents.push(response.data.data);
             this.setState({ events: currentEvents });
             this.getEvents();
@@ -111,7 +114,7 @@ class EventsContainer extends Component {
     };
 
     displayEvents = events => {
-        return events.data.map(foundEvent => (
+        return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
                 <Event event={foundEvent} displayPosts={this.displayPosts} />
             </div>
@@ -129,9 +132,8 @@ class EventsContainer extends Component {
 
                 <div className="events">
                     <h2> Events </h2>
-                    {this.props.currentUser &&
-                    <Link to={`/events/new`} className="event-btn">+</Link>
-                }
+                    {this.state.events ?
+                    <Link to={`/events/new`} className="exit-form">+</Link> : null }
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
 
                 </div>

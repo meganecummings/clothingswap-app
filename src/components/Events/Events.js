@@ -12,7 +12,17 @@ const Events = ({ events, currentUser, handleDelete, displayEventsPosts }) => {
     const eventsArr = events.data.map(event => {
         return(
             <Link key={event._id} to={`/events/${event._id}`} >
-                <Event key={event._id} title={event.title} hostUsername={event.hostUsername} description={event.description} location={event.location} date={event.date} startTime={event.startTime} posts={event.posts} invitees={event.invitees} slug={event.slug} items={event.items} attendees={event.attendees} image={event.image}/>
+                    <div className="border">
+                        <p><strong>{event.title}</strong></p>
+                    </div>
+                    <img src={event.image} alt={`${event.title}`} />
+                    <p>Where: {event.location}</p>
+                    <p>When: {event.eventDate}</p>
+                    <p>Start Time: {event.startTime}</p>
+                    <p>What it's all about: {event.description}</p>
+                    <p>Who's Invited: {event.invitees}</p>
+                    <p><Link to={`/event/${event._id}`}> More Event Details </Link></p>
+                    <p>{event.posts.length && <PostsContainer posts={displayPosts(posts)} />}</p>
             </Link>
         )
     });

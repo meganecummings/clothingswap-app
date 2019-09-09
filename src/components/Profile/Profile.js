@@ -4,9 +4,9 @@ import './Profile.css';
 const Profile = ({ user: { _id, photo, username, email, first_name, last_name}, currentUser, errors }) => {
 
     return (
-        <div className="profile-page">
+        <div className="profile-page card border">
             <h1 className="profile-heading">Profile Page</h1>
-            <div className="profile-container">
+            <div className="profile-container border">
                 <div className="profile-image"><img src={photo} alt={`${username}'s Avatar`}/></div>
                 <div className="profile-content">
                     { errors ? errors : null }

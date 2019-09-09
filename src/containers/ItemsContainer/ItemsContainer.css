@@ -1,0 +1,38 @@
+.add-item {
+    top: 20%;
+    left: 25%;
+    height: 80vh;
+    width: 50vw;
+    background-color: white;
+    border: 1px solid var(--lightorange);
+    position: fixed;
+    z-index: 1;
+    overflow: scroll;
+}
+
+.item-btn {
+    font-size: 3em;
+    margin-right: 1em;
+}
+
+.items-container {
+    margin-top: 16vh;
+}
+
+.add-item form {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-item label {
+    font-weight: bold;
+}
+
+.your-items-container:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow .9s ease-in-out;
+}
+
+.your-items-container:hover::after {
+    transition: ease-out;
+}

@@ -108,20 +108,22 @@ class ProfileContainer extends Component {
         return (
             <div className="profile-page-container">
                 {this.state.errors && this.displayErrors(this.state.errors)}
-                <div className="your-profile-container">
-                    {this.state.profile && 
-                        <Profile 
-                            user={this.state.profile.data} 
-                            errors={this.state.errors} 
-                            currentUser={this.props.currentUser}       
-                    />}
+                
+                <div className="left-side-container">
+                    <div className="your-profile-container border">
+                        {this.state.profile && 
+                            <Profile 
+                                user={this.state.profile.data} 
+                                errors={this.state.errors} 
+                                currentUser={this.props.currentUser}       
+                            />}
+                    </div>
+                    <div className="your-events-container border">
+                        <h2> Events You're Hosting </h2>
+                        {this.state.events.length ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
+                    </div>
                 </div>
- 
-                <div className="your-events-container">
-                    <h2> Events You're Hosting </h2>
-                    {this.state.events.length ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
-                </div>
-                <div className="your-items-container">
+                <div className="your-items-container border">
                     <h2> Your Items </h2>
                     {this.state.items.length ? this.displayItems(this.state.items) : <p>You Don't Have Any Items Yet. Add some Soon! </p>}
                 </div>

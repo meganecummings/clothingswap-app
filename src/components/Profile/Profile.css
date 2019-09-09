@@ -6,14 +6,16 @@
 .profile-page {
     overflow: scroll;
     height: 90vh;
+}
+
+.border {
     border: 2px solid var(--rust);
 }
 
 .profile-container {
     height: 100vh;
     display: grid;
-    grid-template-columns: 4fr 4fr;
-    border: 2px solid var(--rust);
+    grid-template-columns: 3fr 5fr;
     margin: 1em;
 }
 

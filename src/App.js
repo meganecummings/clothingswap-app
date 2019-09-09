@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 // Internal Components
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
 // import Footer from './components/Footer/Footer';
 import Event from './components/Events/Event';
+import Post from './components/Post/Post';
 import { API_URL } from './constants';
 import axios from 'axios';
 import './App.css';
@@ -43,6 +44,18 @@ class App extends Component {
     ));
   };
 
+
+  displayPosts = posts => {
+    return posts.map(post => {
+        return(
+            <div className="your-posts-container" key={post._id}> 
+                <Link to={`/posts/${post._id}`} ></Link>
+                <Post title={post.title} authorUsername={post.authorUsername} description={post.description} content={post.content} />
+            </div>
+        )
+    });
+}
+
   getUserInfo = () => {
     const userId = localStorage.getItem('uid');
     axios.get(`${API_URL}/users/${userId}`, { withCredentials: true })
@@ -58,6 +71,8 @@ class App extends Component {
             currentUser={this.state.currentUser} 
             displayEvents={this.displayEvents} 
             getUserInfo={this.getUserInfo}
+            displayPosts={this.displayPosts}
+            profile={this.state.profile}
           />
           {/* <Footer /> */}
       </div>

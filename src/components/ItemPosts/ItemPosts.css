@@ -1,0 +1,79 @@
+.city-posts {
+    overflow: scroll;
+}
+
+.city-header {
+    display: flex;
+    margin-top: 10px;
+    font-size: 2em;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.city-header h2,
+h5 {
+    margin: 10px;
+    text-align: center;
+}
+
+.city-image {
+    margin-top: 2em;
+}
+
+.city-image img {
+    height: 30vh;
+    width: 100%;
+    top: 0;
+}
+
+.posts-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.posts-header h2 {
+    margin-top: .5em;
+}
+
+.post-btn {
+    font-size: 3em;
+    margin-right: 1em;
+}
+
+.post-box {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    border: 1px solid rgb(241, 241, 241);
+    border-radius: 5px;
+    margin: 1em 2em;
+}
+
+.post-box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: .8s;
+}
+
+.post-box-image {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    height: 10vh;
+    width: 12vw;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: .5em 2em .5em .5em;
+}
+
+.post-box-image img {
+    height: 100%;
+    width: 100%;
+}
+
+.post-box-content {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-right: 2em;
+}
+
+.posts-container {
+    overflow: scroll;
+}
