@@ -1,18 +1,18 @@
 import React from 'react';
-// import './Footer.css';
+import './Footer.css';
 
 const Footer = () => {
     return (
       <footer>
-        <div className="wrap">
-          <div className="social-links">
-            <a href="https://www.facebook.com/megan.cummings.790"><i className="fa fa-facebook-square" aria-hidden="true"></i></a>
-            <a href="https://twitter.com/megcummings"><i className="fa fa-twitter-square" aria-hidden="true"></i></a>
-            <a href="https://www.instagram.com/meganecummings/"><i className="fa fa-instagram" aria-hidden="true"></i></a>
-          </div>
+        <div class="footer-content">
+          <span class="footer-content__item">© 2018 Meg Cummings</span>
+          <span class="footer-content__item footer-content__divider"> / </span>
+          <span class="footer-content__item"><a href="/">Home</a></span>
+          <span class="footer-content__item footer-content__divider"> / </span>
+          <span class="footer-content__item"><a href="/items">Items</a></span>
+          <span class="footer-content__item footer-content__divider"> / </span>
+          <span class="footer-content__item"><a href="/events">Events</a></span>
         </div>
-
-        <p className="copyright">&copy;2019 Meg Cummings</p>
       </footer>
     )
 }

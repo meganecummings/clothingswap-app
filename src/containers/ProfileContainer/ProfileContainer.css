@@ -28,6 +28,7 @@
     grid-row-end: 2;
     overflow: scroll;
     margin: 1em;
+    background-color: white;
 }
 
 .your-events-container {

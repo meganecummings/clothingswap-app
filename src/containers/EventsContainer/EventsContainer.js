@@ -146,13 +146,9 @@ class EventsContainer extends Component {
 
     sendEmail = () => {
         const { email } = this.state;
-        // axios.get(`${API_URL}/events/${email.recipient}/${email.sender}/${email.subject}/${email.text}`, { withCredentials:true })
-        //     .then(response => console.log(response))
-        //     .catch(err => console.error(err))
-
             axios.get(`${API_URL}/send_invites?recipient=${email.recipient}&sender=${email.sender}&topic=${email.subject}&text=${email.text}`, { withCredentials:true })
-            .then(response => console.log(response))
-            .catch(err => console.error(err))    
+                .then(response => console.log(response))
+                .catch(err => console.error(err))    
       };
 
     // Cited Reference: https://github.com/Solomon04/Sendgrid-Express/blob/master/src/App.js

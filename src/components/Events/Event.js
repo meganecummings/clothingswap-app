@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './Event.css'
 import PostsContainer from '../../containers/PostsContainer/PostsContainer';
 
+
+
 const Event = ({ event: { _id, title, description, location, date, startTime, posts, invitees, attendees, image}, displayPosts, handleEventDelete }) => {
 
     const eventDate = date && `${new Date(date).toLocaleDateString()}`;

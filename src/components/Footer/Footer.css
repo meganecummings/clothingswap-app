@@ -6,13 +6,16 @@ Footer
     position: relative;
 }
 
-footer {
+.footer-content {
     background-color: var(--darkorange);
     overflow: auto;
     position: absolute;
-    bottom: 0;
+    /* bottom: 0; */
     width: 100%;
     height: 60px;
+    border-top: 5px var(--rust) solid;
+    padding-top: 2em;
+    color: white;
 }
 
 footer input {
@@ -27,21 +30,4 @@ footer input {
 footer .wrap {
     padding: 30px 15px;
     padding: 2rem 1rem;
-}
-
-.social-links a {
-    font-size: 30px;
-    font-size: 2rem;
-    padding: 15px;
-    padding: 1rem;
-    margin-bottom: 30px;
-    margin-bottom: 2rem;
-    display: inline-block;
-    color: var(--rust);
-}
-
-.copyright {
-    border-top: 2px solid var(--rust);
-    padding: 15px 0 3px;
-    padding: 1rem 0 .2rem;
 }
