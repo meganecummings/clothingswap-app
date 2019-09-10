@@ -93,6 +93,7 @@ class App extends Component {
   updateEvents = id => {
     const updatedEvent = this.state.events.filter(event => event._id !== id);
     this.setState({ events: updatedEvent });
+    console.log('state reset?')
 };
 
   deleteEvent = (event, id) => {

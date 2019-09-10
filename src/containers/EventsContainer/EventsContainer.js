@@ -8,7 +8,6 @@ import Event from '../../components/Events/Event';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
 
-
 class EventsContainer extends Component {
     state = {
         events: null,
@@ -23,8 +22,13 @@ class EventsContainer extends Component {
         cancelledAt: '',
         slug: '',
         image: '', 
-        invitees: '', 
-        emailSent: false,
+        invitees: '',
+        email: {
+            recipient: '',
+            sender: '',
+            subject: '',
+            text: ''
+          }
     };
 
     componentDidMount() {
@@ -65,12 +69,6 @@ class EventsContainer extends Component {
             .catch(error => console.log(error))
     };
 
-    sendEmail = () => {
-        axios.get(`${API_URL}/events/send_email`, { withCredentials:true })
-            .then(response => this.setState({ emailSent: true }))
-            .catch(error => console.log(error))
-    };
-
     submitEvent = event => {
         event.preventDefault();
         const currentEvents = this.state.events;
@@ -91,12 +89,12 @@ class EventsContainer extends Component {
             console.log(response.data)
             currentEvents.push(response.data.data);
             this.setState({ events: currentEvents });
-            this.sendEmail();
             this.getEvents();
             this.props.goBack();
         })
         .catch(error => console.log(error.response));
     };
+
 
     updateEvent = id => {
         const updatedEvent = this.state.events.filter(event => event._id !== id);
@@ -106,12 +104,61 @@ class EventsContainer extends Component {
     displayEvents = events => {
         return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
-                <Event event={foundEvent} handleDelete={this.handleDelete} displayPosts={this.displayPosts} />
+                <Event event={foundEvent} handleEventDelete={this.props.handleEventDelete} displayPosts={this.displayPosts} />
             </div>
         ));
     };
 
+    displayInvite() {
+        const { email } = this.state;
+        const spacer = { margin: 10 }
+        const textArea = { borderRadius: 4 }
+        return (
+            <div className="add-event">
+                <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
+                <div style={{ marginTop: 10 }} >
+                <h2> Send Email </h2>
+                <label> Recipient's Email Address </label>
+                <br />
+                <input value={email.recipient} type='email'
+                    onChange={e => this.setState({ email: { ...email, recipient: e.target.value } })} />
+                <div style={spacer} />
+                <label> Sender's Email Address </label>
+                <br />
+                <input value={email.sender} type='email'
+                    onChange={e => this.setState({ email: { ...email, sender: e.target.value } })} />
+                <div style={spacer} />
+                <label> Subject of Your Email </label>
+                <br />
+                <input value={email.subject} placeholder='Come to my Event!'
+                    onChange={e => this.setState({ email: { ...email, subject: e.target.value } })} />
+                <div style={spacer} />
+                <label> Message </label>
+                <br />
+                <textarea rows={3} value={email.text} style={textArea}
+                    onChange={e => this.setState({ email: { ...email, text: e.target.value } })} />
+                <div style={spacer} />
+                <button onClick={this.sendEmail}> Send Email </button>
+                </div>
+            </div>
+        )     
+    };
+
+    sendEmail = () => {
+        const { email } = this.state;
+        // axios.get(`${API_URL}/events/${email.recipient}/${email.sender}/${email.subject}/${email.text}`, { withCredentials:true })
+        //     .then(response => console.log(response))
+        //     .catch(err => console.error(err))
+
+            axios.get(`${API_URL}/send_invites?recipient=${email.recipient}&sender=${email.sender}&topic=${email.subject}&text=${email.text}`, { withCredentials:true })
+            .then(response => console.log(response))
+            .catch(err => console.error(err))    
+      };
+
+    // Cited Reference: https://github.com/Solomon04/Sendgrid-Express/blob/master/src/App.js
+
     render() {
+
         return (
             <div className="events-container">
                 {this.props.deleteEvent && 
@@ -122,17 +169,18 @@ class EventsContainer extends Component {
 
                 <div className="events">
                     <h2> Events 
-                    {this.state.events ?
-                        <Link to={`/events/new`} className="add-btn">+</Link> : null }
+                    {this.state.events ? <Link to={`/events/new`} > Add New Event</Link> : null }
+                    {this.state.events ? <Link to={`/events/send-invite`} >Invite People to Your Event </Link> : null}
                     </h2>
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
-
                 </div>
+                {this.props.sendInvites && this.displayInvite()}        
+
                 {this.props.addEvent && 
                     <div className="add-event">
                         <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
                         <h1>Your New Event</h1>
-                        <form >
+                        <form action="https://formspree.io/megcummings@gmail.com" method="POST">
                             <label>Title of the Event</label>
                             <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                             <label>Description</label>

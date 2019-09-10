@@ -1,8 +1,8 @@
 .add-event {
     top: 20%;
-    left: 25%;
+    left: 10%;
     height: 80vh;
-    width: 50vw;
+    width: 80vw;
     background-color: white;
     border: 1px solid var(--lightorange);
     position: fixed;
@@ -19,11 +19,20 @@
     margin-top: 16vh;
 }
 
-.add-event form {
+.add-event form,
+.events-container form {
     display: flex;
     flex-direction: column;
 }
 
-.add-event label {
+.add-event label,
+.events-container label {
     font-weight: bold;
+}
+
+textarea,
+input {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: 60vw;
 }
