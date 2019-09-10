@@ -59,7 +59,7 @@ class EventsContainer extends Component {
     getUserEvents = () => {
         const userId = this.props.currentUser
         axios.get(`${API_URL}/users/${userId}/events`, { withCredentials: true })
-            .then(response => this.setState({ userEvents: response.data }))
+            .then(response => this.setState({ userEvents: response.data.data }))
             .catch(error => console.log(error))
     };
 
@@ -112,9 +112,10 @@ class EventsContainer extends Component {
                     </div>}
 
                 <div className="events">
-                    <h2> Events </h2>
+                    <h2> Events 
                     {this.state.events ?
-                    <Link to={`/events/new`} className="exit-form">+</Link> : null }
+                        <Link to={`/events/new`} className="add-btn">+</Link> : null }
+                    </h2>
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
 
                 </div>

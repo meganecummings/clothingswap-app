@@ -13,6 +13,7 @@ class ItemsContainer extends Component {
     state = {
         items: null,
         posts: null,
+        item: null,
         itemName: '',
         brand: '',
         size: '',
@@ -26,6 +27,14 @@ class ItemsContainer extends Component {
 
     componentDidMount() {
         this.getItems();
+    };
+
+
+    componentDidMount() {
+        if (this.props.itemID) this.getItem();
+        else {
+        this.getItems();
+        }
     };
 
 
@@ -46,10 +55,18 @@ class ItemsContainer extends Component {
         this.getItems();
     };
 
+    getItem = () => {
+        axios.get(`${API_URL}/items/${this.props.itemID}`, { withCredentials:true })
+            .then(response => {
+                this.setState({ items: [response.data.data] })
+            })
+            .catch(error => console.log(error))
+    };
+
     getItems = () => {
         axios.get(`${API_URL}/items`)
             .then(response => {
-                this.setState({ items: response.data })
+                this.setState({ items: response.data.data })
             })
             .catch(error => console.log(error))
     };
@@ -98,9 +115,10 @@ class ItemsContainer extends Component {
     };
 
     displayItems = items => {
+        console.log(items);
         return items.map(foundItem => (
             <div className="your-items-container border card" key={foundItem._id}>
-                <Item item={foundItem} handleDelete={this.handleDelete} displayPosts={this.displayPosts} />
+                <Item item={foundItem} profile={this.props.profile} handleDelete={this.handleDelete} displayPosts={this.displayPosts} />
             </div>
         ));
     };
@@ -123,14 +141,15 @@ class ItemsContainer extends Component {
                             postImage={this.state.profile.photo}
                             handleDelete={this.handleDelete}
                             handleEdit={this.handleEdit}
+                            profile={this.props.profile}
                         />}
                 </div>
 
                 <div className="items border">
                     <h2> Items </h2>
                     {this.state.items ?
-                    <Link to={`/items/new`} className="event-btn">+</Link> : null }
-                    {this.state.items ? this.displayItems(this.state.items.data) : <p> You Don't Have Any Items Yet. <a href={`/items/new`}> Add some Items! </a> </p>}
+                    <Link to={`/items/new`} className="add-btn">+</Link> : null }
+                    {this.state.items ? this.displayItems(this.state.items) : <p> You Don't Have Any Items Yet. <a href={`/items/new`}> Add some Items! </a> </p>}
                 </div>
 
                 {this.props.addItems && 

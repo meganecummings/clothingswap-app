@@ -5,7 +5,7 @@ import PostsContainer from '../../containers/PostsContainer/PostsContainer';
 
 const Event = ({ event: { _id, title, description, location, date, startTime, posts, invitees, attendees, image}, displayPosts, handleEventDelete }) => {
 
-    const eventDate = date && `${new Date(date).toLocaleDateString()} @ ${new Date(date).toLocaleTimeString()}`;
+    const eventDate = date && `${new Date(date).toLocaleDateString()}`;
 
     return (
         <div className="event-card border card" key={_id}>
@@ -19,7 +19,7 @@ const Event = ({ event: { _id, title, description, location, date, startTime, po
             <p>What it's all about: {description}</p>
             <p>Who's Invited: {invitees}</p>
             <p><Link to={`/event/${_id}`}> More Event Details </Link></p>
-            <p>{posts.length && <PostsContainer posts={displayPosts(posts)} />}</p>
+            <p>{posts.length && <PostsContainer posts={displayPosts(posts)} profile={this.props.profile}/>}</p>
             <button onClick={event => {handleEventDelete(event,_id)}} >Delete</button>
         </div>
     )

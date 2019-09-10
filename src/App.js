@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
-// import Footer from './components/Footer/Footer';
+import Footer from './components/Footer/Footer';
 import Event from './components/Events/Event';
+import Contact from './components/Contact/Contact';
 import Post from './components/Post/Post';
 import { API_URL } from './constants';
 import axios from 'axios';
@@ -15,7 +16,8 @@ class App extends Component {
   state = {
       currentUser: localStorage.getItem('uid'),
       profile: null,
-      events: null
+      events: null,
+      items: null
   };
 
   setCurrentUser = (userId) => {
@@ -25,6 +27,8 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getUserInfo(); 
+    this.getItems();
+    this.getEvents();
   };
 
   handleLogout = () => {
@@ -70,7 +74,15 @@ class App extends Component {
     axios.get(`${API_URL}/users/${userId}/events`, { withCredentials: true })
         .then(response => this.setState({ events: response.data }))
         .catch(error => console.log(error));
-};
+  };
+
+  getItems = () => {
+    axios.get(`${API_URL}/items`)
+        .then(response => {
+            this.setState({ items: response.data })
+        })
+        .catch(error => console.log(error))
+  };
 
   handleEventDelete = (event, id) => {
     event.preventDefault();
@@ -78,6 +90,11 @@ class App extends Component {
     this.deleteEvent(event, id);
     this.getEvents();
   };
+
+  updateEvents = id => {
+    const updatedEvent = this.state.events.filter(event => event._id !== id);
+    this.setState({ events: updatedEvent });
+};
 
   deleteEvent = (event, id) => {
     event.preventDefault();
@@ -103,8 +120,10 @@ class App extends Component {
             profile={this.state.profile}
             handleEventDelete={this.handleEventDelete}
             events={this.state.events}
+            items={this.state.items}
           />
-          {/* <Footer /> */}
+          <Contact />
+          <Footer />
       </div>
     );
   }

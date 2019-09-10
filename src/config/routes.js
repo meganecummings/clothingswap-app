@@ -10,7 +10,7 @@ import ItemsContainer from '../containers/ItemsContainer/ItemsContainer';
 
 import Event from '../components/Events/Event';
 
-const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, history, currentUser, profile, handleEventDelete, events }) => {
+const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, history, currentUser, profile, handleEventDelete, events, items }) => {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
         <Route {...rest} render={( props ) => (
@@ -30,9 +30,11 @@ const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, hist
             <Route path="/profile" render={(props) => 
                 <ProfileContainer {...props} currentUser={currentUser} handleEventDelete={handleEventDelete} {...history}  profile={profile} user_id={props.match.params.user_id} />} />
             <Route exact path="/items" render={(props) => 
-                <ItemsContainer profile={profile} {...props} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
+                <ItemsContainer profile={profile} {...props} items={items} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
+            <Route path="/items/:item_id" render={(props) => 
+                <ItemsContainer {...props} profile={profile} currentUser={currentUser} items={items} displayPosts={displayPosts} itemID={props.match.params.item_id}/>} />
             <Route exact path="/items/new" render={(props) => 
-                <ItemsContainer {...props} currentUser={currentUser} profile={profile} addItems={true} {...history}  displayEvents={displayEvents} />  } />
+                <ItemsContainer {...props} currentUser={currentUser} items={items} profile={profile} addItems={true} {...history}  displayEvents={displayEvents} />  } />
             <Route exact path="/events" render={(props) => 
                 <EventsContainer {...props} profile={profile} events={events} handleEventDelete={handleEventDelete} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/events/new" render={(props) => 
