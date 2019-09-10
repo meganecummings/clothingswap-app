@@ -23,6 +23,7 @@ const Events = ({ events, currentUser, handleDelete, displayEventsPosts }) => {
                     <p>Who's Invited: {event.invitees}</p>
                     <p><Link to={`/event/${event._id}`}> More Event Details </Link></p>
                     <p>{event.posts.length && <PostsContainer posts={displayPosts(posts)} />}</p>
+                    <button onClick={event => {handleDelete(event,_id)}} >Delete</button>
             </Link>
         )
     });

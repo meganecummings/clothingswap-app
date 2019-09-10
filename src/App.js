@@ -15,6 +15,7 @@ class App extends Component {
   state = {
       currentUser: localStorage.getItem('uid'),
       profile: null,
+      events: null
   };
 
   setCurrentUser = (userId) => {
@@ -63,6 +64,33 @@ class App extends Component {
         .catch(error => console.log(error));
   };
 
+
+  getEvents  = () => {
+    const userId = localStorage.getItem('uid');
+    axios.get(`${API_URL}/users/${userId}/events`, { withCredentials: true })
+        .then(response => this.setState({ events: response.data }))
+        .catch(error => console.log(error));
+};
+
+  handleEventDelete = (event, id) => {
+    event.preventDefault();
+    console.log(id);
+    this.deleteEvent(event, id);
+    this.getEvents();
+  };
+
+  deleteEvent = (event, id) => {
+    event.preventDefault();
+    console.log(id);
+    axios.delete(`${API_URL}/events/${id}/delete`)
+        .then(response => {
+            this.getEvents();
+            this.updateEvents(id);
+            this.props.goBack();
+        })
+        .catch(error => console.log(error.response));
+};
+
   render() {
     return (
       <div className="App">
@@ -73,6 +101,8 @@ class App extends Component {
             getUserInfo={this.getUserInfo}
             displayPosts={this.displayPosts}
             profile={this.state.profile}
+            handleEventDelete={this.handleEventDelete}
+            events={this.state.events}
           />
           {/* <Footer /> */}
       </div>

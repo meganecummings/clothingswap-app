@@ -19,7 +19,7 @@ class ProfileContainer extends Component {
         items: []
     };
 
-    handleDelete = event => {
+    handlePostDelete = event => {
         event.preventDefautl()
         console.log(event.target);
         this.deletePost();
@@ -88,7 +88,7 @@ class ProfileContainer extends Component {
     displayEvents = events => {
         return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
-                <Event event={foundEvent} displayPosts={this.displayPosts} />
+                <Event event={foundEvent} handleEventDelete={this.props.handleEventDelete} displayPosts={this.displayPosts} />
             </div>
         ));
     };

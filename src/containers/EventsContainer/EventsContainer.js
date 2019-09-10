@@ -42,13 +42,6 @@ class EventsContainer extends Component {
         event.preventDefault();
     };
 
-    handleDelete = (event, id) => {
-        event.preventDefault();
-        console.log(id);
-        this.deleteEvent(event, id);
-        this.getEvents();
-    };
-
     getEvent = () => {
         axios.get(`${API_URL}/events/${this.props.eventID}`, { withCredentials: true })
             .then(response => { 
@@ -101,22 +94,10 @@ class EventsContainer extends Component {
         this.setState({ events: updatedEvent });
     };
 
-    deleteEvent = (event, id) => {
-        event.preventDefault();
-        console.log(id);
-        axios.delete(`${API_URL}/events/${id}`)
-            .then(response => {
-                this.getEvents();
-                this.updateEvents(id);
-                this.props.goBack();
-            })
-            .catch(error => console.log(error.response));
-    };
-
     displayEvents = events => {
         return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
-                <Event event={foundEvent} displayPosts={this.displayPosts} />
+                <Event event={foundEvent} handleDelete={this.handleDelete} displayPosts={this.displayPosts} />
             </div>
         ));
     };

@@ -10,7 +10,7 @@ import ItemsContainer from '../containers/ItemsContainer/ItemsContainer';
 
 import Event from '../components/Events/Event';
 
-const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, history, currentUser, profile }) => {
+const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, history, currentUser, profile, handleEventDelete, events }) => {
 
     const PrivateRoute = ({ component: Component, ...rest }) => (
         <Route {...rest} render={( props ) => (
@@ -28,17 +28,17 @@ const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, hist
             <Route path='/register' render={(props) => 
                 <Home {...props} register={props.match.path} />} />
             <Route path="/profile" render={(props) => 
-                <ProfileContainer {...props} currentUser={currentUser} {...history}  profile={profile} user_id={props.match.params.user_id} />} />
+                <ProfileContainer {...props} currentUser={currentUser} handleEventDelete={handleEventDelete} {...history}  profile={profile} user_id={props.match.params.user_id} />} />
             <Route exact path="/items" render={(props) => 
                 <ItemsContainer profile={profile} {...props} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/items/new" render={(props) => 
                 <ItemsContainer {...props} currentUser={currentUser} profile={profile} addItems={true} {...history}  displayEvents={displayEvents} />  } />
             <Route exact path="/events" render={(props) => 
-                <EventsContainer {...props} profile={profile} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
+                <EventsContainer {...props} profile={profile} events={events} handleEventDelete={handleEventDelete} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/events/new" render={(props) => 
-                <EventsContainer {...props} profile={profile} currentUser={currentUser} addEvent={true} {...history} displayEvents={displayEvents} />  } />
+                <EventsContainer {...props} events={events} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} addEvent={true} {...history} displayEvents={displayEvents} />  } />
             <Route path="/event/:event_id" render={(props) => 
-                <EventsContainer {...props} profile={profile} currentUser={currentUser} displayPosts={displayPosts} eventID={props.match.params.event_id}/>} />
+                <EventsContainer {...props} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} events={events} displayPosts={displayPosts} eventID={props.match.params.event_id}/>} />
             <Route path='*' render={() => <section><h2>Not Found</h2></section>} />
         </Switch>
     )
