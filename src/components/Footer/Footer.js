@@ -10,8 +10,6 @@ const Footer = () => {
             <a href="https://twitter.com/megcummings"><i className="fa fa-twitter-square" aria-hidden="true"></i></a>
             <a href="https://www.instagram.com/meganecummings/"><i className="fa fa-instagram" aria-hidden="true"></i></a>
           </div>
-          <input type="text" placeholder="Email Address" />
-          <button type="submit">Subscribe</button>
         </div>
 
         <p className="copyright">&copy;2019 Meg Cummings</p>

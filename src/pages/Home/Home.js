@@ -5,6 +5,7 @@ import Login from '../../components/Auth/Login/Login';
 import Register from '../../components/Auth/Register/Register';
 import './Home.css';
 import clothes_rack from './clothes_rack.jpg';
+import Contact from './components/Contact/Contact';
 import amazing_prices from './amazing_prices.jpg';
 import environment_help from './environment_help.jpg';
 import clothes_on_ground from './clothes_on_ground.jpg';
@@ -58,6 +59,7 @@ class Home extends Component {
                         </article>
                     </div>
                 </section>
+                <Contact />
             </div>
         )
     }

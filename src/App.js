@@ -6,7 +6,6 @@ import Routes from './config/routes';
 import NavBar from './components/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import Event from './components/Events/Event';
-import Contact from './components/Contact/Contact';
 import Post from './components/Post/Post';
 import { API_URL } from './constants';
 import axios from 'axios';
@@ -122,7 +121,6 @@ class App extends Component {
             events={this.state.events}
             items={this.state.items}
           />
-          <Contact />
           <Footer />
       </div>
     );

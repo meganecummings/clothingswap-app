@@ -8,6 +8,7 @@ import Event from '../../components/Events/Event';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
 
+
 class EventsContainer extends Component {
     state = {
         events: null,
@@ -22,7 +23,8 @@ class EventsContainer extends Component {
         cancelledAt: '',
         slug: '',
         image: '', 
-        invitees: ''
+        invitees: '', 
+        emailSent: false,
     };
 
     componentDidMount() {
@@ -63,6 +65,12 @@ class EventsContainer extends Component {
             .catch(error => console.log(error))
     };
 
+    sendEmail = () => {
+        axios.get(`${API_URL}/events/send_email`, { withCredentials:true })
+            .then(response => this.setState({ emailSent: true }))
+            .catch(error => console.log(error))
+    };
+
     submitEvent = event => {
         event.preventDefault();
         const currentEvents = this.state.events;
@@ -83,6 +91,7 @@ class EventsContainer extends Component {
             console.log(response.data)
             currentEvents.push(response.data.data);
             this.setState({ events: currentEvents });
+            this.sendEmail();
             this.getEvents();
             this.props.goBack();
         })

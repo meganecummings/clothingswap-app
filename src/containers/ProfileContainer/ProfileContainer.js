@@ -102,7 +102,12 @@ class ProfileContainer extends Component {
                 </div>
             )
         });
-    }
+    };
+
+    handleProfileEdit = () => {
+
+    };
+
 
     render() {
         return (
@@ -115,7 +120,8 @@ class ProfileContainer extends Component {
                             <Profile 
                                 user={this.state.profile.data} 
                                 errors={this.state.errors} 
-                                currentUser={this.props.currentUser}       
+                                currentUser={this.props.currentUser}   
+                                handleEdit={this.handleProfileEdit}
                             />}
                     </div>
                     <div className="your-events-container border">
