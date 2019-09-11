@@ -146,7 +146,8 @@ section {
 Buttons
 ------------------------------------------- */
 
-button {
+button,
+.button {
     cursor: pointer;
     outline: 0;
     border: 2px solid var(--rust);

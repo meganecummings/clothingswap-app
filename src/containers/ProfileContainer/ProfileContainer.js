@@ -68,7 +68,7 @@ class ProfileContainer extends Component {
     displayItems = items => {
        return items.map(foundItem => (
             <div className="items" key={foundItem._id}>
-                <Link to={`/items/${foundItem._id}`}>Check out this item</Link>
+                <Link to={`/item/${foundItem._id}`}>Check out this item</Link>
                 <h4>{foundItem.title}</h4>
                 <p>{foundItem.description}</p>
                 <img src={foundItem.image} alt={`${foundItem.title}`} />

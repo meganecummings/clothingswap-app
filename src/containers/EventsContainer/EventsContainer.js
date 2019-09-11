@@ -38,6 +38,7 @@ class EventsContainer extends Component {
         }
     };
 
+
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
@@ -46,6 +47,7 @@ class EventsContainer extends Component {
 
     handleEdit = event => {
         event.preventDefault();
+
     };
 
     getEvent = () => {
@@ -61,6 +63,25 @@ class EventsContainer extends Component {
             .then(response => this.setState({ events: response.data.data }))
             .catch(error => console.log(error));
     }; 
+
+        
+    deleteEvent = (event, id) => {
+        event.preventDefault();
+        console.log(id);
+        axios.delete(`${API_URL}/events/${id}/delete`)
+            .then(response => {
+                this.getEvents();
+            })
+            .catch(error => console.log(error));
+    };
+
+
+    handleEventDelete = (event, id) => {
+        event.preventDefault();
+        console.log(id);
+        this.deleteEvent(event, id);
+        
+    };
 
     getUserEvents = () => {
         const userId = this.props.currentUser
@@ -104,7 +125,7 @@ class EventsContainer extends Component {
     displayEvents = events => {
         return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
-                <Event event={foundEvent} handleEventDelete={this.props.handleEventDelete} displayPosts={this.displayPosts} />
+                <Event event={foundEvent} handleEventDelete={this.handleEventDelete} displayPosts={this.displayPosts} />
             </div>
         ));
     };
@@ -153,6 +174,33 @@ class EventsContainer extends Component {
 
     // Cited Reference: https://github.com/Solomon04/Sendgrid-Express/blob/master/src/App.js
 
+      displayAddEvent = () => {
+          return ( 
+            <div className="add-event">
+            <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
+            <h1>Your New Event</h1>
+            <form action="https://formspree.io/megcummings@gmail.com" method="POST">
+                <label>Title of the Event</label>
+                <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                <label>Description</label>
+                <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
+                <label>Location</label>
+                <input type="text" name="location" value={this.state.
+                location} onChange={this.handleChange} />
+                <label>Date</label>
+                <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
+                <label>Start Time</label>
+                <input type="text" name="startTime" value={this.state.startTime} onChange={this.handleChange} />
+                <label>Invitees</label>
+                <input type="text" name="invitees" value={this.state.invitees} onChange={this.handleChange} />
+                <label>URL for Image for Event</label>
+                <input type="text" name="image" value={this.state.image} onChange={this.handleChange} />
+                <button onClick={this.submitEvent}>Submit</button>
+            </form>
+        </div>
+          )
+      }
+
     render() {
 
         return (
@@ -160,41 +208,19 @@ class EventsContainer extends Component {
                 {this.props.deleteEvent && 
                     <div> 
                         <Link to="/events"> <button>Cancel</button> </Link>
-                        <button onClick={this.deleteEvent}>Delete</button>
+                        <button onClick={this.props.deleteEvent}>Delete</button>
                     </div>}
 
                 <div className="events">
                     <h2> Events 
-                    {this.state.events ? <Link to={`/events/new`} > Add New Event</Link> : null }
-                    {this.state.events ? <Link to={`/events/send-invite`} >Invite People to Your Event </Link> : null}
+                    {this.state.events ? <Link className="button" to={`/events/new`} > Add New Event</Link> : null }
+                    {this.state.events ? <Link className="button" to={`/events/send-invite`} >Invite People to Your Event </Link> : null}
                     </h2>
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
                 {this.props.sendInvites && this.displayInvite()}        
 
-                {this.props.addEvent && 
-                    <div className="add-event">
-                        <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
-                        <h1>Your New Event</h1>
-                        <form action="https://formspree.io/megcummings@gmail.com" method="POST">
-                            <label>Title of the Event</label>
-                            <input type="text" name="title" value={this.state.title} onChange={this.handleChange} />
-                            <label>Description</label>
-                            <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
-                            <label>Location</label>
-                            <input type="text" name="location" value={this.state.
-                            location} onChange={this.handleChange} />
-                            <label>Date</label>
-                            <input type="date" name="date" value={this.state.date} onChange={this.handleChange} />
-                            <label>Start Time</label>
-                            <input type="text" name="startTime" value={this.state.startTime} onChange={this.handleChange} />
-                            <label>Invitees</label>
-                            <input type="text" name="invitees" value={this.state.invitees} onChange={this.handleChange} />
-                            <label>URL for Image for Event</label>
-                            <input type="text" name="image" value={this.state.image} onChange={this.handleChange} />
-                            <button onClick={this.submitEvent}>Submit</button>
-                        </form>
-                    </div> }    
+                {this.props.addEvent && this.displayAddEvent() }    
             </div>
         )
     }

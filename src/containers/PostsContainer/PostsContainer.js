@@ -22,10 +22,13 @@ class PostContainer extends Component {
         return (
             <div className="post-container">
                 <div className="post">
-                    {/* <img src={this.props.profile.photo} alt={`${this.state.posts.authorUsername}`} />
-                    <h1>{this.state.post.title}</h1>
-                    <p>{this.state.post.content}</p>
-                    <p>Posted By: {this.state.post.authorUsername}</p> */}
+                    {/* {this.props.profile && 
+                    (<>
+                        <img src={this.props.profile.photo} alt={`${this.state.posts.authorUsername}`} /> 
+                        <h1>{this.state.post.title}</h1>
+                        <p>{this.state.post.content}</p>
+                        <p>Posted By: {this.state.post.authorUsername}</p> 
+                    </>)} */}
                 </div>
 
             </div>

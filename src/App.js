@@ -48,7 +48,6 @@ class App extends Component {
     ));
   };
 
-
   displayPosts = posts => {
     return posts.map(post => {
         return(
@@ -83,29 +82,10 @@ class App extends Component {
         .catch(error => console.log(error))
   };
 
-  handleEventDelete = (event, id) => {
-    event.preventDefault();
-    console.log(id);
-    this.deleteEvent(event, id);
-    this.getEvents();
-  };
-
   updateEvents = id => {
     const updatedEvent = this.state.events.filter(event => event._id !== id);
     this.setState({ events: updatedEvent });
     console.log('state reset?')
-};
-
-  deleteEvent = (event, id) => {
-    event.preventDefault();
-    console.log(id);
-    axios.delete(`${API_URL}/events/${id}/delete`)
-        .then(response => {
-            this.getEvents();
-            this.updateEvents(id);
-            this.props.goBack();
-        })
-        .catch(error => console.log(error.response));
 };
 
   render() {
@@ -118,7 +98,6 @@ class App extends Component {
             getUserInfo={this.getUserInfo}
             displayPosts={this.displayPosts}
             profile={this.state.profile}
-            handleEventDelete={this.handleEventDelete}
             events={this.state.events}
             items={this.state.items}
           />

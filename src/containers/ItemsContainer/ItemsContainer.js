@@ -8,6 +8,7 @@ import Item from '../../components/Items/Item';
 import ItemPosts from '../../components/ItemPosts/ItemPosts';
 import { Link } from 'react-router-dom';
 import './ItemsContainer.css';
+import Dropdown from '../../components/Dropdown/Dropdown';
 
 class ItemsContainer extends Component {
     state = {
@@ -115,12 +116,46 @@ class ItemsContainer extends Component {
     };
 
     displayItems = items => {
-        console.log(items);
         return items.map(foundItem => (
             <div className="your-items-container border card" key={foundItem._id}>
-                <Item item={foundItem} profile={this.props.profile} handleDelete={this.handleDelete} displayPosts={this.displayPosts} />
+                <Item item={foundItem} profile={this.props.profile} handleDelete={this.handleDelete} displayPosts={this.displayPosts} handleAddToEvent={this.handleAddToEvent} goBack={this.props.goBack} events={this.props.events} />
             </div>
         ));
+    };
+
+    displayNewItemForm = () => {
+        return (
+            <div className="add-item">
+                <Link className="exit-form" onClick={() => this.props.goBack()}>x</Link>
+                <form>
+                    <h2>Add a New Item</h2>
+                    <label>Item Name</label>
+                    <input type="text" name="itemName" value={this.state.itemName} onChange={this.handleChange} />
+                    <label>Brand</label>
+                    <input id="add-item-brand" type="text" name="brand" value={this.state.brand} onChange={this.handleChange} />
+                    <label>Size</label>
+                    <input type="text" name="size" value={this.state.size} onChange={this.handleChange} />
+                    <label>Category</label>
+                    <input type="text" name="category" value={this.state.category} onChange={this.handleChange} />
+                    <label>Description</label>
+                    <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
+                    <label>Quality of Item</label>
+                    <input type="text" name="quality" value={this.state.quality} onChange={this.handleChange} />
+                    <label>URL of Image</label>
+                    <input type="text" name="image" value={this.state.image} onChange={this.handleChange} />
+                    <button onClick={this.submitItem}>Submit</button>
+                </form>
+            </div>
+        )
+    };
+
+    displayAddToEventForm = () => {
+        return (
+            <div className="add-item">
+                { this.props.events && 
+                <Dropdown title="Select Event" events={this.props.events} goBack={this.props.goBack} item_id={this.props.itemId}/> }
+            </div>
+        )
     };
 
     render() {
@@ -152,29 +187,8 @@ class ItemsContainer extends Component {
                     {this.state.items ? this.displayItems(this.state.items) : <p> You Don't Have Any Items Yet. <a href={`/items/new`}> Add some Items! </a> </p>}
                 </div>
 
-                {this.props.addItems && 
-                    <div className="add-item">
-                        <Link className="exit-form" onClick={() => this.props.goBack()}>x</Link>
-                        <form>
-                            <h2>Add a New Item</h2>
-                            <label>Item Name</label>
-                            <input type="text" name="itemName" value={this.state.itemName} onChange={this.handleChange} />
-                            <label>Brand</label>
-                            <input id="add-item-brand" type="text" name="brand" value={this.state.brand} onChange={this.handleChange} />
-                            <label>Size</label>
-                            <input type="text" name="size" value={this.state.size} onChange={this.handleChange} />
-                            <label>Category</label>
-                            <input type="text" name="category" value={this.state.category} onChange={this.handleChange} />
-                            <label>Description</label>
-                            <input type="text" name="description" value={this.state.description} onChange={this.handleChange} />
-                            <label>Quality of Item</label>
-                            <input type="text" name="quality" value={this.state.quality} onChange={this.handleChange} />
-                            <label>URL of Image</label>
-                            <input type="text" name="image" value={this.state.image} onChange={this.handleChange} />
-                            <button onClick={this.submitItem}>Submit</button>
-                        </form>
-                    </div>
-                }
+                {this.props.addItems && this.displayNewItemForm() }
+                {this.props.addToEvents && this.displayAddToEventForm() }
             </div>
         )
     };

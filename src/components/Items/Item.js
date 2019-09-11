@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Item.css'
-import PostsContainer from '../../containers/PostsContainer/PostsContainer';
 
-const Item = ({ item: { _id, itemName, brand, size, quality, posts, image}, displayPosts, handleDelete, profile }) => {
+const Item = ({ item: { _id, itemName, brand, size, quality, posts, image}, handleDelete }) => {
 
     return (
         <div className="item-card" key={_id}>
@@ -13,8 +13,8 @@ const Item = ({ item: { _id, itemName, brand, size, quality, posts, image}, disp
             {quality !== '' && <p> Quality: {quality} </p> }
             {brand !== '' && <p> Brand: {brand} </p> }
             {size !== '' && <p> Size: {size} </p> }
-            <p>{posts && <PostsContainer posts={posts} profile={profile} displayPosts={displayPosts}/>}</p>
             <button onClick={event => {handleDelete(event,_id)}} >Delete</button>
+            <Link className="button" to={`/add_to_event/${_id}`}> Add to an Event</Link>
         </div>
     )
 }

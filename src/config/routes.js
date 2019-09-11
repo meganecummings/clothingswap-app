@@ -29,12 +29,14 @@ const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, hist
                 <Home {...props} register={props.match.path} />} />
             <Route path="/profile" render={(props) => 
                 <ProfileContainer {...props} currentUser={currentUser} handleEventDelete={handleEventDelete} {...history}  profile={profile} user_id={props.match.params.user_id} />} />
+            <Route path="/item/:item_id" render={(props) => 
+                <ItemsContainer {...props} profile={profile} events={events} currentUser={currentUser} items={items} displayPosts={displayPosts} itemID={props.match.params.item_id}/>} />
             <Route exact path="/items" render={(props) => 
-                <ItemsContainer profile={profile} {...props} items={items} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
-            <Route path="/items/:item_id" render={(props) => 
-                <ItemsContainer {...props} profile={profile} currentUser={currentUser} items={items} displayPosts={displayPosts} itemID={props.match.params.item_id}/>} />
+                <ItemsContainer profile={profile} {...props} events={events} items={items} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/items/new" render={(props) => 
-                <ItemsContainer {...props} currentUser={currentUser} items={items} profile={profile} addItems={true} {...history}  displayEvents={displayEvents} />  } />
+                <ItemsContainer {...props} currentUser={currentUser} items={items} profile={profile} addItems={true} events={events} {...history} displayEvents={displayEvents} />  } />
+            <Route exact path="/add_to_event/:item_id" render={(props) => 
+                <ItemsContainer {...props} currentUser={currentUser} items={items} profile={profile} addToEvents={true} itemId={props.match.params.item_id} events={events} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/events" render={(props) => 
                 <EventsContainer {...props} profile={profile} events={events} handleEventDelete={handleEventDelete} currentUser={currentUser} {...history} displayEvents={displayEvents} />  } />
             <Route exact path="/events/new" render={(props) => 

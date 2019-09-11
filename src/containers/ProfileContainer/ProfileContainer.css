@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 8fr 4fr;
     grid-template-rows: 2;
-    height: 90vh;
+    /* height: 90vh; */
 }
 
 .your-events-container:hover,
@@ -32,7 +32,7 @@
 }
 
 .your-events-container {
-    overflow: scroll;
+    /* overflow: scroll; */
     margin: 1em;
 }
 
