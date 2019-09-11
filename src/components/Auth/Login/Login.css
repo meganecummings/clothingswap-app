@@ -1,12 +1,13 @@
 .login {
     top: 20%;
-    left: 25%;
-    width: 50%;
+    left: 15%;
+    /* width: 50%; */
     background-color: white;
     border: 1px solid var(--rust);
     opacity: .9;
     border-radius: 4px;
     position: fixed;
+    justify-content: space-between;
 }
 
 .login .submit {

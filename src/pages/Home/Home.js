@@ -27,7 +27,7 @@ class Home extends Component {
         return (
             <div className="home-page">
                 <div className="home-image container full-width clothing-image-bkground">
-                    
+                <h2 className="slogan">swap, don't shop.</h2>    
                 </div>
                 {this.props.login && <Login setCurrentUser={this.props.setCurrentUser} history={this.props.history} /> }
                 {this.props.register && <Register history={this.props.history} /> }

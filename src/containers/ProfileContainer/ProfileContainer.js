@@ -16,6 +16,7 @@ class ProfileContainer extends Component {
         events: [],
         items: [],
         updatedProfile: null,
+        userData: {}
     };
 
     // ------- LIFE CYCLE FUNCTIONS ---- //
@@ -89,7 +90,8 @@ class ProfileContainer extends Component {
                 errors={this.state.errors} 
                 currentUser={this.props.currentUser}   
                 handleChange={this.handleChange}
-                handle={this.handleProfilePhotoChange}
+                handleProfileSubmit={this.handleProfileSubmit}
+                state={this.state.profile}
             />
         );
     };
@@ -107,24 +109,26 @@ class ProfileContainer extends Component {
         });
     };
 
-    handleProfileSubmit(event) {
+    handleProfileSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state.profile);
         axios.put(`${API_URL}/users/${this.state.profile.data._id}/update`, {
-            first_name: this.state.profile.first_name,
-            last_name: this.state.profile.last_name,
-            email: this.state.profile.email,
-            photo: this.state.profile.photo,
-            size: this.state.profile.size,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            email: this.state.email,
+            photo: this.state.photo,
+            size: this.state.size,
             phone_number: this.state.phone_number
         })
             .then(response => {
-                console.log(response.data.data)})
+                console.log(response.data.data)
+                this.props.history.goBack()
+                this.setState({ profile: response.data })
+            })
             .catch(error => console.log(error));
     };
 
     displayProfileEditForm = () => {
-        const { email, first_name, last_name, photo, size, phone_number  } = this.state.profile;
+        const { _id, email, first_name, last_name, photo, size, phone_number  } = this.state.profile;
 
         return (
             <div className="add-item grid-form">

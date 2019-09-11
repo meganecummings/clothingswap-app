@@ -49,12 +49,6 @@ h1 {
     letter-spacing: .8rem;
 }
 
-
-/* h2 {
-    margin-bottom: 45px;
-    margin-bottom: 3rem;
-} */
-
 h3 {
     margin-bottom: 45px;
     margin-bottom: 3rem;
@@ -316,18 +310,6 @@ textarea {
     color: var(--rust);
 }
 
-
-/* .home-body h2,
-h1 {
-    display: flex;
-} */
-
-
-/* .home-body h1 {
-    display: flex;
-    justify-content: center;
-} */
-
 .heading {
     margin-top: 1%;
 }
@@ -368,6 +350,14 @@ h2 {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
     right: 2%;
+}
+
+.slogan {
+    color: white;
+    position: absolute;
+    top: 70%;
+    left: 20%;
+    font-size: xx-large;
 }
 
 @media (min-width: 1224px) {
