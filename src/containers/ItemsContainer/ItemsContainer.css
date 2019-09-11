@@ -1,10 +1,9 @@
 .add-item {
     top: 20%;
     left: 25%;
-    height: 80vh;
-    width: 50vw;
+    /* width: 50vw; */
     background-color: white;
-    border: 1px solid var(--lightorange);
+    border: 3px solid var(--rust);
     position: fixed;
     z-index: 1;
     overflow: scroll;

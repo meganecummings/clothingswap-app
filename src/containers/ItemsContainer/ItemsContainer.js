@@ -5,7 +5,6 @@ import slugify from 'react-slugify';
 // Internal Components
 import { API_URL } from '../../constants';
 import Item from '../../components/Items/Item';
-import ItemPosts from '../../components/ItemPosts/ItemPosts';
 import { Link } from 'react-router-dom';
 import './ItemsContainer.css';
 import Dropdown from '../../components/Dropdown/Dropdown';
@@ -166,24 +165,11 @@ class ItemsContainer extends Component {
                         <Link to='/items'> <button>Cancel</button> </Link>
                         <button onClick={this.deleteItem}>Delete</button>
                     </div>}
-
-                <div className="item-posts">
-                    {this.props.itemName &&
-                        <ItemPosts
-                            currentUser={this.props.currentUser}
-                            items={this.state.items}
-                            posts={this.state.posts}
-                            postImage={this.state.profile.photo}
-                            handleDelete={this.handleDelete}
-                            handleEdit={this.handleEdit}
-                            profile={this.props.profile}
-                        />}
-                </div>
-
-                <div className="items border">
+                <div className="items">
                     <h2> Items </h2>
+                    <br />
                     {this.state.items ?
-                    <Link to={`/items/new`} className="add-btn">+</Link> : null }
+                    <Link to={`/items/new`} className="button">Add New Item</Link> : null }
                     {this.state.items ? this.displayItems(this.state.items) : <p> You Don't Have Any Items Yet. <a href={`/items/new`}> Add some Items! </a> </p>}
                 </div>
 

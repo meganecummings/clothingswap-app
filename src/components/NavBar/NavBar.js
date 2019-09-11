@@ -35,7 +35,7 @@ const NavBar = ({ logout, currentUser }) => {
     return (
         <nav>
             <div className="nav-items">
-                <Link className="nav-li" to="/"><h1>UpSwap</h1></Link>
+                <Link className="nav-li" to="/"><h1>ClothingSwap</h1></Link>
                 { currentUser ? authLinks : links }
             </div>
         </nav>

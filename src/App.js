@@ -42,7 +42,7 @@ class App extends Component {
 
   displayEvents = events => {
     return events.map(foundEvent => (
-        <div className="your-events-container" key={foundEvent._id}>
+        <div className="profile-events-container" key={foundEvent._id}>
             <Event event={foundEvent} displayPosts={this.displayPosts} />
         </div>
     ));
@@ -100,6 +100,7 @@ class App extends Component {
             profile={this.state.profile}
             events={this.state.events}
             items={this.state.items}
+            goBack={this.props.goBack}
           />
           <Footer />
       </div>

@@ -9,7 +9,7 @@ const Event = ({ event: { _id, title, description, location, date, startTime, in
     const eventDate = date && `${new Date(date).toLocaleDateString()}`;
 
     return (
-        <div className="event-card border card" key={_id}>
+        <div className="event-card card" key={_id}>
             <div >
                 <p><strong>{title}</strong></p>
             </div>

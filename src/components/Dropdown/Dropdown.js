@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants';
+import './Dropdown.css';
 
 class Dropdown extends Component {
     constructor(props) {
@@ -21,10 +22,10 @@ class Dropdown extends Component {
         alert('Your Item is now linked to: ' + this.state.value);
         event.preventDefault();
         this.updateEvent();
+        this.props.goBack();
     };
 
     updateEvent = () => {
-        const itemUpdate = [{ item: this.props.item_id }];
         axios.put(`${API_URL}/events/${this.state.value}/update`, { items: this.props.item_id })
             .then(response => {
                 console.log(response.data.data.items)})
@@ -39,7 +40,7 @@ class Dropdown extends Component {
 
     render() {
         return(
-            <form >
+            <form className="event-item-form" >
                 <label>
                     Select the Event You'd like to add the Item to:
                     <Link className="exit-form" onClick={() => this.props.goBack()}>x</Link>

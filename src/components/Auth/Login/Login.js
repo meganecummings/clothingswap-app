@@ -10,7 +10,8 @@ class Login extends Component {
     state = {
         email: '',
         password: '',
-        error: null
+        error: null, 
+        currentUser: null,
     };
 
     handleChange = (event) => {
@@ -19,12 +20,13 @@ class Login extends Component {
         });
     };
 
-    handleSubmit = (event) =>{
+    handleSubmit = (event) => {
         event.preventDefault();
         const userInfo = this.state;
         axios.post(`${API_URL}/auth/login`, userInfo, { withCredentials: true })
             .then(response => {
                 this.props.setCurrentUser(response.data.id);
+                this.setState({ currentUser: response.data.id })
                 this.props.history.push('/profile');
             })
             .catch(error => {

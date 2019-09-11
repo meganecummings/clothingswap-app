@@ -9,7 +9,7 @@ const Item = ({ item: { _id, itemName, brand, size, quality, posts, image}, hand
             <div >
                 <p><strong> {itemName}</strong></p>
             </div>
-            <img src={image} alt={`${itemName}`} />
+            <img className="border" src={image} alt={`${itemName}`} />
             {quality !== '' && <p> Quality: {quality} </p> }
             {brand !== '' && <p> Brand: {brand} </p> }
             {size !== '' && <p> Size: {size} </p> }

@@ -5,7 +5,10 @@
 
 .profile-page {
     overflow: scroll;
-    height: 90vh;
+    padding: 1em;
+    margin: 1em;
+    background-color: white;
+    border: 5px solid var(--lightorange);
 }
 
 .border {
@@ -13,7 +16,6 @@
 }
 
 .profile-container {
-    height: 100vh;
     display: grid;
     grid-template-columns: 3fr 5fr;
     margin: 1em;

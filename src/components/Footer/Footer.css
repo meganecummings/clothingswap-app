@@ -10,9 +10,7 @@ Footer
     background-color: var(--darkorange);
     overflow: auto;
     position: absolute;
-    /* bottom: 0; */
     width: 100%;
-    height: 60px;
     border-top: 5px var(--rust) solid;
     padding-top: 2em;
     color: white;

@@ -2,7 +2,7 @@ nav {
     background-color: var(--rust);
     display: flex;
     justify-content: space-between;
-    height: 16vh;
+    height: 14vh;
     border-bottom: 5px var(--lightorange) solid;
 }
 

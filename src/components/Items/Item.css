@@ -10,6 +10,16 @@
 }
 
 .item-card img {
-    height: 10vh;
-    width: 10vw;
+    height: 15vh;
+    /* width: 10vw; */
 }
+
+.items,
+.event-card {
+    padding: 1em;
+}
+
+
+/* .items {
+    height: 76vh;
+} */

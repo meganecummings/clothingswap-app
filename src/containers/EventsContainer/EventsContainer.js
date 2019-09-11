@@ -217,10 +217,10 @@ class EventsContainer extends Component {
                     </div>}
 
                 <div className="events">
-                    <h2> Events 
+                    <h2> Events </h2>
+                    <br />
                     {this.state.events ? <Link className="button" to={`/events/new`} > Add New Event</Link> : null }
                     {this.state.events ? <Link className="button" to={`/events/send-invite`} >Invite People to Your Event </Link> : null}
-                    </h2>
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
 

@@ -44,7 +44,9 @@ const Routes = ({ setCurrentUser, displayPosts, displayEvents, getUserInfo, hist
             <Route exact path="/events/send-invite" render={(props) => 
                 <EventsContainer {...props} events={events} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} sendInvites={true} {...history} displayEvents={displayEvents} />  } />
             <Route path="/event/:event_id" render={(props) => 
-                <EventsContainer {...props} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} events={events} displayPosts={displayPosts} eventID={props.match.params.event_id}/>} />
+                <EventsContainer {...props} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} events={events} displayPosts={displayPosts} eventID={props.match.params.event_id} goBack={props.goBack} />} />
+            <Route path="/update_profile" render={(props) => 
+                <ProfileContainer {...props} handleEventDelete={handleEventDelete} profile={profile} currentUser={currentUser} goBack={props.goBack} events={events} editProfile={true} />} />
             <Route path='*' render={() => <section><h2>Not Found</h2></section>} />
         </Switch>
     )

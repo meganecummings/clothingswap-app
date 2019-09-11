@@ -11,7 +11,7 @@ class EventItemsContainer extends Component{
         itemDetails: [],
     };
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         this.setState({ itemIDs: this.props.items })
     };
 
@@ -37,7 +37,7 @@ class EventItemsContainer extends Component{
     render() {
         return(
             <>
-                {this.state.itemIDs && this.getItemInfo()}
+                {/* {this.state.itemIDs && this.getItemInfo()} */}
             </>
         )
     }
