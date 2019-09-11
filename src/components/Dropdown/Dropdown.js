@@ -24,7 +24,8 @@ class Dropdown extends Component {
     };
 
     updateEvent = () => {
-        axios.put(`${API_URL}/events/${this.state.value}/update`, { items: this.props.itemId })
+        const itemUpdate = [{ item: this.props.item_id }];
+        axios.put(`${API_URL}/events/${this.state.value}/update`, { items: this.props.item_id })
             .then(response => {
                 console.log(response.data.data.items)})
             .catch(error => console.log(error));

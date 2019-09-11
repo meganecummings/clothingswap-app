@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Event.css'
-import PostsContainer from '../../containers/PostsContainer/PostsContainer';
+import EventItemsContainer from '../../containers/EventItemsContainer/EventItemsContainer';
 
 
-
-const Event = ({ event: { _id, title, description, location, date, startTime, posts, invitees, attendees, image}, displayPosts, handleEventDelete }) => {
+const Event = ({ event: { _id, title, description, location, date, startTime, invitees, items, image}, handleEventDelete, profile }) => {
 
     const eventDate = date && `${new Date(date).toLocaleDateString()}`;
 
@@ -21,7 +20,7 @@ const Event = ({ event: { _id, title, description, location, date, startTime, po
             <p>What it's all about: {description}</p>
             <p>Who's Invited: {invitees}</p>
             <p><Link to={`/event/${_id}`}> More Event Details </Link></p>
-            <p>{posts.length && <PostsContainer posts={displayPosts(posts)} profile={this.props.profile}/>}</p>
+            <p>{items.length ? <EventItemsContainer profile={profile} items={items} /> : <p> No items Yet </p>}</p>
             <button onClick={event => {handleEventDelete(event,_id)}} >Delete</button>
         </div>
     )

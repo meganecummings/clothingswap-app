@@ -1,7 +1,7 @@
 import React from 'react';
 import './Profile.css';
 
-const Profile = ({ user: { _id, photo, username, email, first_name, last_name}, currentUser, handleEdit, errors }) => {
+const Profile = ({ user: { _id, photo, username, email, first_name, last_name}, currentUser, handleEdit, errors, handlePhotoChange, handleProfilePhotoChange }) => {
 
     return (
         <div className="profile-page card border">

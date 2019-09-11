@@ -104,9 +104,23 @@ class ProfileContainer extends Component {
         });
     };
 
-    handleProfileEdit = () => {
 
+    changeProfilePhoto = () => {
+        axios.put(`${API_URL}/${this.state.profile._id}/update`, { photo: this.state.photo })
+            .then(response => console.log(response.data.data.photo))
+            .catch(error => console.log(error))
     };
+
+    handleProfilePhotoChange = (event) => {
+        const photo = this.state.profile.photo
+        this.setState({ photo: event.target.value });
+    };
+
+    handlePhotoChange = (event) => {
+        event.preventDefault();
+        this.changeProfilePhoto();
+    };
+
 
 
     render() {
@@ -121,7 +135,8 @@ class ProfileContainer extends Component {
                                 user={this.state.profile.data} 
                                 errors={this.state.errors} 
                                 currentUser={this.props.currentUser}   
-                                handleEdit={this.handleProfileEdit}
+                                handlePhotoChange={this.handlePhotoChange}
+                                handleProfilePhotoChange={this.handleProfilePhotoChange}
                             />}
                     </div>
                     <div className="your-events-container border">

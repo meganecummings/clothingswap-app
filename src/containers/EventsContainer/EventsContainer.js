@@ -7,6 +7,8 @@ import { API_URL } from '../../constants';
 import Event from '../../components/Events/Event';
 import { Link } from 'react-router-dom';
 import './EventsContainer.css';
+// import ItemsContainer from '../ItemsContainer/ItemsContainer';
+import Item from '../../components/Items/Item';
 
 class EventsContainer extends Component {
     state = {
@@ -125,7 +127,7 @@ class EventsContainer extends Component {
     displayEvents = events => {
         return events.map(foundEvent => (
             <div className="your-events-container" key={foundEvent._id}>
-                <Event event={foundEvent} handleEventDelete={this.handleEventDelete} displayPosts={this.displayPosts} />
+                <Event event={foundEvent} handleEventDelete={this.handleEventDelete} displayPosts={this.displayPosts} profile={this.props.profile}/>
             </div>
         ));
     };
@@ -134,6 +136,9 @@ class EventsContainer extends Component {
         const { email } = this.state;
         const spacer = { margin: 10 }
         const textArea = { borderRadius: 4 }
+        const { sender } = email;
+        this.setState({ sender: this.props.profile.email })
+
         return (
             <div className="add-event">
                 <button className="exit-form" onClick={() => this.props.goBack()} >x</button>
@@ -202,9 +207,9 @@ class EventsContainer extends Component {
       }
 
     render() {
-
         return (
             <div className="events-container">
+            
                 {this.props.deleteEvent && 
                     <div> 
                         <Link to="/events"> <button>Cancel</button> </Link>
@@ -218,9 +223,11 @@ class EventsContainer extends Component {
                     </h2>
                     {this.state.events ? this.displayEvents(this.state.events) : <p> You Don't Have Any Events Yet. Add some Soon! </p>}
                 </div>
+
                 {this.props.sendInvites && this.displayInvite()}        
 
                 {this.props.addEvent && this.displayAddEvent() }    
+            
             </div>
         )
     }

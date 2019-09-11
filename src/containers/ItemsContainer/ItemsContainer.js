@@ -118,7 +118,7 @@ class ItemsContainer extends Component {
     displayItems = items => {
         return items.map(foundItem => (
             <div className="your-items-container border card" key={foundItem._id}>
-                <Item item={foundItem} profile={this.props.profile} handleDelete={this.handleDelete} displayPosts={this.displayPosts} handleAddToEvent={this.handleAddToEvent} goBack={this.props.goBack} events={this.props.events} />
+                <Item item={foundItem} profile={this.props.profile} handleDelete={this.handleDelete} handleAddToEvent={this.handleAddToEvent} goBack={this.props.goBack} events={this.props.events} />
             </div>
         ));
     };

@@ -164,7 +164,8 @@ button,
     transition: all .3s ease-in-out;
 }
 
-button:hover {
+button:hover,
+.button:hover {
     background-color: var(--rust);
     color: white;
     font-weight: 600;
