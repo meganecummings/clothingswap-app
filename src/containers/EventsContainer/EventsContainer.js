@@ -136,8 +136,7 @@ class EventsContainer extends Component {
         const { email } = this.state;
         const spacer = { margin: 10 }
         const textArea = { borderRadius: 4 }
-        const { sender } = email;
-        this.setState({ sender: this.props.profile.email })
+        
 
         return (
             <div className="add-event">
