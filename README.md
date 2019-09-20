@@ -1,6 +1,9 @@
 
 ## ClothingSwap
 
+This is the Frontend of my MERN stack application. Please see below for the backend gitHub. https://git.generalassemb.ly/megcummings/ClothingSwap-backend
+
+
 #### What is ClothingSwap?
 
 ClothingSwap is a MERN stack application that aims to connect communties to themselves through the coordination of Clothing Swaps and the exchange of unwanted, unloved or outgrown items. 
