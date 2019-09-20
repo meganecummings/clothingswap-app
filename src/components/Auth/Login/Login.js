@@ -30,6 +30,7 @@ class Login extends Component {
                 this.props.history.push('/profile');
             })
             .catch(error => {
+                console.log(error);
                 this.setState({ error: error.response.data.message })
             });
     };
