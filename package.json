@@ -2,7 +2,7 @@
     "name": "clothingswap-app",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://meganecummings.github.io/clothingswap-app",
+    "homepage": "https://meganecummings.github.io/clothingswap-app/",
     "dependencies": {
         "@sendgrid/mail": "^6.4.0",
         "axios": "^0.19.0",
