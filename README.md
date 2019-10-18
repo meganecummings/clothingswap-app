@@ -1,7 +1,7 @@
 
 ## ClothingSwap
 
-This is the Frontend of my MERN stack application. Please see below for the backend gitHub. https://git.generalassemb.ly/megcummings/ClothingSwap-backend
+This is the Frontend of my MERN stack application. Please see below for the backend gitHub. https://github.com/meganecummings/clothing_swap_backend.git
 
 
 #### What is ClothingSwap?
