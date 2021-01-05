@@ -5,7 +5,7 @@
     "homepage": "https://meganecummings.github.io/clothingswap-app/",
     "dependencies": {
         "@sendgrid/mail": "^6.4.0",
-        "axios": "^0.19.0",
+        "axios": "^0.21.1",
         "gh-pages": "^2.1.1",
         "react": "^16.9.0",
         "react-dom": "^16.9.0",
